@@ -65,29 +65,33 @@ areaOfACircle(pi: 3.14, radius: 5.0)
 //6. Создать функцию, которая принимает логический тип “ночь ли сегодня” и возвращает
 //строку с описанием времени суток.
 
-func nowIsNight(isNight: Bool) -> Bool {
+func nowIsNight(isNight: Bool) -> String {
     if isNight {
-        print("now night")
+        return "now night"
     } else {
-        print("now day")
+        return "now day"
     }
-    return true
 }
 
-nowIsNight(isNight: true)
+print(nowIsNight(isNight: true))
 
 //7. Создать функцию, принимающую 1 аргумент — число от 0 до 100, и возвращающую
 //true, если оно простое, и false, если сложное.
 
 func simpleNumberOrNot(number: Int) -> Bool {
-    if number % 2 == 1 {
-        return true
-    } else {
+    if number < 2 && number > 100 {
         return false
+    } else  {
+        for i in 2..<number {
+            if number % i == 0 {
+                return false
+            }
+        }
+        return true
     }
 }
 
-simpleNumberOrNot(number: 5)
+print(simpleNumberOrNot(number: 7))
 
 //8. Создать функцию, принимающую 1 аргумент — номер месяца (от 1 до 12), и
 //возвращающую время года, которому этот месяц принадлежит (зима, весна, лето или
@@ -96,9 +100,7 @@ simpleNumberOrNot(number: 5)
 func timeIsAYear(numberOfMonth: Int) {
    
     switch numberOfMonth {
-    case 1...2:
-        print("it's a winter")
-    case 12:
+    case 1...2,12:
         print("it's a winter")
     case 3...5:
         print("it's a spring")
@@ -133,27 +135,44 @@ print("factorial = \(sumFact)")
 //10  Создать функцию, которая выводит все числа последовательности Фибоначчи до
 //введённого индекса. Например fib(n:6) -> 0, 1, 1, 2, 3, 5, 8
 
-func fibonachi(index: Int) -> Int {
-    if index == 0 {
-        return 0
-    } else if index == 1 {
-        return 1
+func fibonachi(index: Int) {
+    if index <= 0 {
+        return
     }
-    return fibonachi(index: index - 1) + fibonachi(index: index - 2)
-}
-
-fibonachi(index: 16)
-
-//11 Создать функцию, которая считает сумму цифр четырехзначного числа,
-//переданного в параметры функции
-
-func sumNumber(number: [Int]) -> Int  {
-    var sum = 0
-    for i in number {
-        sum += i
+        var firstValue = 0
+        var secondValue = 1
+        
+        print(firstValue, terminator: ", ")
+        
+        if index > 1 {
+            print(secondValue, terminator: ", ")
+            for i in 2..<index {
+                let new = firstValue + secondValue
+                print(new, terminator: ", ")
+                firstValue = secondValue
+                secondValue = new
+            }
+        }
+         print("")
     }
-    return sum
-}
-
-print(sumNumber(number: [1, 2, 3, 4]))
+    
+    print(fibonachi(index: 7))
+    
+    
+    //11 Создать функцию, которая считает сумму цифр четырехзначного числа,
+    //переданного в параметры функции
+    
+    func sumNumber(number: Int) -> Int  {
+        var sum = 0
+        var count = number
+        
+        while count > 0 {
+            sum += count % 10
+            count /= 10
+        }
+        return sum
+    }
+    
+    print(sumNumber(number: 1234))
+    
 
