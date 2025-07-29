@@ -79,7 +79,7 @@ print(nowIsNight(isNight: true))
 //true, если оно простое, и false, если сложное.
 
 func simpleNumberOrNot(number: Int) -> Bool {
-    if number < 2 && number > 100 {
+    if number < 2 || number > 100 {
         return false
     } else  {
         for i in 2..<number {
